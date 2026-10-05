@@ -104,6 +104,32 @@ p { margin: 0 0 1rem; }
 .section-head p { color: var(--ink-soft); margin-top: .8rem; }
 .ornament { width: 52px; height: 52px; margin: 0 auto .8rem; }
 
+/* ---------- why handpoke ---------- */
+.handpoke { background: var(--cream); }
+.dots-mark { width: 52px; height: 52px; margin: 0 auto .8rem; color: var(--ink); display: block; }
+.hp-points {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 1rem;
+}
+.hp-points li {
+  position: relative; background: var(--paper); border-radius: var(--radius);
+  padding: 1.3rem 1.4rem 1.2rem 3.4rem; box-shadow: var(--shadow);
+}
+/* a single "poked" dot as the bullet */
+.hp-points li::before {
+  content: ""; position: absolute; left: 1.3rem; top: 1.55rem;
+  width: 14px; height: 14px; border-radius: 50%; background: var(--yellow);
+  box-shadow: 0 0 0 2px var(--ink), 0 0 0 5px var(--paper), 0 0 0 6.5px rgb(21 42 3 / .35);
+}
+.hp-points h3 { font-size: 1.25rem; }
+.hp-points p { margin: 0; color: var(--ink-soft); font-size: 1rem; }
+@media (max-width: 640px) {
+  .hp-points { gap: .6rem; }
+  .hp-points li { padding: 1rem 1.1rem .95rem 3rem; }
+  .hp-points li::before { left: 1.05rem; top: 1.25rem; }
+  .hp-points p { font-size: .95rem; line-height: 1.5; }
+}
+
 /* ---------- portfolio ---------- */
 .filters { display: flex; flex-wrap: wrap; justify-content: center; gap: .5rem; margin-bottom: 2rem; }
 .chip {
