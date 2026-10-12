@@ -243,7 +243,22 @@ button.btn { font: inherit; font-weight: 600; cursor: pointer; }
 .contact-card svg { width: 40px; height: 40px; fill: var(--ink); margin-bottom: .6rem; }
 .contact-card .label { font-size: .85rem; text-transform: uppercase; letter-spacing: .08em; color: var(--ink-soft); }
 .contact-card .value { font-weight: 600; font-size: 1.35rem; overflow-wrap: anywhere; }
+.contact-card .value.email { font-size: 1.1rem; overflow-wrap: normal; }
+@media (max-width: 600px) {
+  .contact-card { padding: 1.2rem 1rem; }
+  .contact-card svg { width: 32px; height: 32px; margin-bottom: .3rem; }
+}
 .contact-card .note { font-size: .9rem; color: var(--ink-soft); }
+.send-card {
+  position: relative; z-index: 1; max-width: 760px; margin: 0 auto 1.2rem; padding: 1.3rem 1.5rem;
+  background: var(--cream); border-radius: var(--radius); box-shadow: var(--shadow);
+}
+.send-card ul { margin: 0; padding: 0; list-style: none; display: grid; gap: .35rem; }
+.send-card li { position: relative; padding-left: 1.4rem; }
+.send-card li::before {
+  content: ""; position: absolute; left: .2rem; top: .55em; width: .55rem; height: .55rem;
+  border-radius: 50%; background: var(--yellow); box-shadow: 0 0 0 2px var(--ink);
+}
 
 /* ---------- footer ---------- */
 .footer { background: var(--ink); color: var(--cream); padding-block: 2.5rem calc(2.5rem + env(safe-area-inset-bottom, 0px)); }
