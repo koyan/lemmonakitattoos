@@ -30,6 +30,8 @@ body {
 img { max-width: 100%; height: auto; display: block; }
 a { color: inherit; }
 h1, h2, h3 { font-family: var(--display); font-weight: 700; line-height: 1.1; margin: 0; }
+/* Greek headings: real spelling in the HTML; uppercase drops the tonos (needs lang="el"). */
+:lang(el) :is(h2, h3, .tagline) { text-transform: uppercase; }
 h2 { font-size: clamp(2.2rem, 5vw, 3.2rem); letter-spacing: .01em; }
 h3 { font-size: 1.35rem; margin-bottom: .4rem; }
 p { margin: 0 0 1rem; }
