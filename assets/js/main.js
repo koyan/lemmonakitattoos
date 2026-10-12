@@ -80,7 +80,7 @@
     img.src = s.src;
     img.width = s.w;
     img.height = s.h;
-    img.alt = s.caption;
+    img.alt = s.alt || s.caption;
     cap.textContent = s.caption;
     count.textContent = slides.length > 1 ? `${index + 1} / ${slides.length}` : "";
     // warm the cache for the neighbours
