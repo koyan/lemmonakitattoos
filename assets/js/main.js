@@ -44,6 +44,7 @@
     applyFilter(chip.dataset.filter);
     const hash = chip.dataset.filter === "all" ? "#work" : `#work/${chip.dataset.filter}`;
     history.replaceState(null, "", hash);
+    syncLang(); // replaceState fires no hashchange
   }));
   const initial = location.hash.match(/^#work\/([\w-]+)$/);
   applyFilter(initial && [...chips].some((c) => c.dataset.filter === initial[1]) ? initial[1] : "all");
@@ -61,9 +62,15 @@
   }
 
   // ----- language switch: stay on the same section / filter -----
-  document.querySelectorAll(".lang-btn").forEach((a) => a.addEventListener("click", () => {
-    if (location.hash) a.href = a.href.split("#")[0] + location.hash;
-  }));
+  // Kept up to date on every hash change (not on click), so analytics that
+  // intercept the click still navigate to the right place.
+  function syncLang() {
+    document.querySelectorAll(".lang-btn").forEach((a) => {
+      a.href = a.href.split("#")[0] + location.hash;
+    });
+  }
+  syncLang();
+  addEventListener("hashchange", syncLang);
 
   // ----- lightbox -----
   const box = document.getElementById("lightbox");
