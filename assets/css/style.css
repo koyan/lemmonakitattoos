@@ -81,6 +81,10 @@ p { margin: 0 0 1rem; }
   .topbar nav { order: 3; width: 100%; margin-left: 0; justify-content: space-around; gap: .5rem; }
   .topbar nav a { font-size: .92rem; padding: .55rem .2rem .5rem; }
 }
+@media (max-width: 360px) {
+  .topbar nav { gap: .2rem; }
+  .topbar nav a { font-size: .8rem; white-space: nowrap; }
+}
 
 /* ---------- buttons ---------- */
 .btn {
@@ -229,6 +233,17 @@ button.btn { font: inherit; font-weight: 600; cursor: pointer; }
   background: var(--yellow); font-weight: 700; display: grid; place-items: center; font-size: .9rem;
 }
 
+/* ---------- about ---------- */
+.about { background: var(--sage-light); }
+.about-inner { display: flex; align-items: center; gap: clamp(1.5rem, 5vw, 3.5rem); max-width: 860px; }
+.about-mark { flex: none; width: clamp(160px, 24vw, 240px); height: auto; border-radius: 50%; box-shadow: var(--shadow); }
+.about-text h2 { margin-bottom: 1rem; }
+.about-text p { font-size: 1.08rem; }
+.about-text p + p { margin-top: .9rem; }
+@media (max-width: 640px) {
+  .about-inner { flex-direction: column; text-align: center; }
+}
+
 /* ---------- contact ---------- */
 .contact { position: relative; overflow: hidden; background: var(--sage); }
 .contact .section-head p { color: var(--ink); }
@@ -297,6 +312,11 @@ button.btn { font: inherit; font-weight: 600; cursor: pointer; }
 }
 .footer-inner { display: flex; flex-wrap: wrap; align-items: center; gap: 1.2rem; }
 .footer p { margin: 0; flex: 1 1 240px; font-size: .92rem; opacity: .9; }
+.review-link {
+  color: var(--ink); background: var(--yellow); text-decoration: none; font-weight: 600; font-size: .92rem;
+  padding: .5rem 1rem; border-radius: 999px; white-space: nowrap;
+}
+.review-link:hover { background: var(--cream); }
 .palette { display: flex; gap: 6px; }
 .palette i { width: 22px; height: 22px; border-radius: 6px; }
 .palette i:nth-child(1) { background: var(--yellow); }
