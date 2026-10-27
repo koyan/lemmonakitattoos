@@ -219,6 +219,7 @@ button.btn { font: inherit; font-weight: 600; cursor: pointer; }
 .hours tr.today { background: var(--cream); font-weight: 600; }
 .hours tr.today th { font-weight: 600; }
 .hours tr.today th::after { content: " · " attr(data-label); font-weight: 400; color: var(--ink-soft); }
+.by-appointment { margin-bottom: 1.4rem; }
 .hours-note { font-size: .92rem; color: var(--ink-soft); margin-bottom: 1.4rem; }
 .steps { margin: 0; padding: 0; list-style: none; counter-reset: s; }
 .steps li { counter-increment: s; position: relative; padding-left: 2.6rem; margin-bottom: 1rem; }
@@ -249,6 +250,11 @@ button.btn { font: inherit; font-weight: 600; cursor: pointer; }
   .contact-card svg { width: 32px; height: 32px; margin-bottom: .3rem; }
 }
 .contact-card .note { font-size: .9rem; color: var(--ink-soft); }
+.facts {
+  position: relative; z-index: 1; list-style: none; margin: 0 auto 1.4rem; padding: 0;
+  display: flex; flex-wrap: wrap; justify-content: center; gap: .5rem;
+}
+.facts li { background: var(--yellow); border-radius: 999px; padding: .35rem .95rem; font-weight: 600; font-size: .95rem; }
 .send-card {
   position: relative; z-index: 1; max-width: 760px; margin: 0 auto 1.2rem; padding: 1.3rem 1.5rem;
   background: var(--cream); border-radius: var(--radius); box-shadow: var(--shadow);
