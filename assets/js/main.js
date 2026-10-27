@@ -61,6 +61,19 @@
     }
   }
 
+  // ----- quick contact bar: step aside while the hero buttons or the contact cards are on screen -----
+  const bar = document.querySelector(".quickbar");
+  const spots = [".hero .actions", "#contact .contact-grid"].map((q) => document.querySelector(q)).filter(Boolean);
+  if (bar && "IntersectionObserver" in window) {
+    const inView = new Set();
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => (e.isIntersecting ? inView.add(e.target) : inView.delete(e.target)));
+      bar.classList.toggle("is-hidden", inView.size > 0);
+      bar.inert = inView.size > 0; // keep the off-screen links out of the tab order
+    });
+    spots.forEach((el) => io.observe(el));
+  }
+
   // ----- language switch: stay on the same section / filter -----
   // Kept up to date on every hash change (not on click), so analytics that
   // intercept the click still navigate to the right place.

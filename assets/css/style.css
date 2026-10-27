@@ -266,8 +266,35 @@ button.btn { font: inherit; font-weight: 600; cursor: pointer; }
   border-radius: 50%; background: var(--yellow); box-shadow: 0 0 0 2px var(--ink);
 }
 
+/* ---------- quick contact bar (phones only) ---------- */
+.quickbar { display: none; }
+@media (max-width: 720px) {
+  .quickbar {
+    position: fixed; z-index: 50; left: 0; right: 0; bottom: 0;
+    display: grid; grid-auto-flow: column; grid-auto-columns: 1fr;
+    padding: .35rem .5rem calc(.35rem + env(safe-area-inset-bottom, 0px));
+    background: var(--ink); box-shadow: 0 -4px 16px rgba(21, 42, 3, .18);
+    transition: transform .25s ease;
+  }
+  .quickbar.is-hidden { transform: translateY(110%); }
+  .quickbar a {
+    display: flex; flex-direction: column; align-items: center; gap: .15rem;
+    padding: .3rem; border-radius: 10px; color: var(--cream); text-decoration: none;
+    font-size: .8rem; font-weight: 600;
+  }
+  .quickbar a:active { background: rgba(255, 247, 210, .12); }
+  .quickbar svg { width: 24px; height: 24px; fill: var(--yellow); }
+}
+@media (max-width: 720px) and (prefers-reduced-motion: reduce) {
+  .quickbar { transition: none; }
+}
+
 /* ---------- footer ---------- */
 .footer { background: var(--ink); color: var(--cream); padding-block: 2.5rem calc(2.5rem + env(safe-area-inset-bottom, 0px)); }
+@media (max-width: 720px) {
+  /* room for the quick contact bar */
+  .footer { padding-bottom: calc(2.5rem + 3.9rem + env(safe-area-inset-bottom, 0px)); }
+}
 .footer-inner { display: flex; flex-wrap: wrap; align-items: center; gap: 1.2rem; }
 .footer p { margin: 0; flex: 1 1 240px; font-size: .92rem; opacity: .9; }
 .palette { display: flex; gap: 6px; }
