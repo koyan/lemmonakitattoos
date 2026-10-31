@@ -62,7 +62,7 @@ p { margin: 0 0 1rem; }
 .main-nav a:hover { border-color: var(--yellow); }
 .lang:empty { display: none; }
 
-/* menu button (☰) with every section and page */
+/* menu button (☰): home plus the extra pages (the sections are already in the top bar) */
 .menu { position: relative; }
 .menu summary {
   list-style: none; cursor: pointer; display: grid; place-items: center;
@@ -85,10 +85,6 @@ p { margin: 0 0 1rem; }
 .menu-panel a { display: block; padding: .6rem .8rem; border-radius: 10px; text-decoration: none; font-weight: 500; }
 .menu-panel a:hover, .menu-panel a[aria-current="page"] { background: var(--cream); }
 .menu-panel a[aria-current="page"] { font-weight: 700; }
-.menu-heading {
-  margin: .5rem .8rem .2rem; padding-top: .6rem; border-top: 1px solid rgb(21 42 3 / .12);
-  font-size: .78rem; text-transform: uppercase; letter-spacing: .08em; color: var(--ink-soft);
-}
 @media (prefers-reduced-motion: reduce) { .burger i { transition: none; } }
 .lang-btn {
   display: inline-grid; place-items: center; min-width: 44px; height: 36px; padding: 0 .7rem;
@@ -243,6 +239,7 @@ p { margin: 0 0 1rem; }
 }
 .more { text-align: center; margin: 2.5rem 0 0; }
 .more + .more { margin-top: 1rem; }
+.more-links { display: flex; flex-wrap: wrap; justify-content: center; gap: .8rem; }
 button.btn { font: inherit; font-weight: 600; cursor: pointer; }
 
 /* ---------- visit ---------- */
