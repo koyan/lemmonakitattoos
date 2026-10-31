@@ -1,6 +1,60 @@
+// Shared by every page: opening hours, quick contact bar, language switch.
+{
+  // ----- opening hours: highlight today (in Greek time) -----
+  const hours = document.querySelector(".hours");
+  if (hours) {
+    const day = new Intl.DateTimeFormat("en-US", { timeZone: "Europe/Athens", weekday: "short" }).format(new Date());
+    const n = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].indexOf(day);
+    const row = hours.querySelector(`tr[data-day="${n}"]`);
+    if (row) {
+      row.classList.add("today");
+      row.querySelector("th").dataset.label = hours.dataset.todayLabel;
+    }
+  }
+
+  // ----- quick contact bar: step aside while the hero buttons or the contact cards are on screen -----
+  const bar = document.querySelector(".quickbar");
+  const spots = [".hero .actions", "#contact .contact-grid"].map((q) => document.querySelector(q)).filter(Boolean);
+  if (bar && "IntersectionObserver" in window) {
+    const inView = new Set();
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => (e.isIntersecting ? inView.add(e.target) : inView.delete(e.target)));
+      bar.classList.toggle("is-hidden", inView.size > 0);
+      bar.inert = inView.size > 0; // keep the off-screen links out of the tab order
+    });
+    spots.forEach((el) => io.observe(el));
+  }
+}
+
+// ----- menu (☰): works without JS (<details>); here it also closes on Escape, outside clicks and link clicks -----
+{
+  const menu = document.querySelector(".menu");
+  if (menu) {
+    const close = () => { menu.open = false; };
+    document.addEventListener("click", (e) => {
+      if (!menu.contains(e.target) || e.target.closest(".menu-panel a")) close();
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && menu.open) { close(); menu.querySelector("summary").focus(); }
+    });
+  }
+}
+
+// ----- language switch: stay on the same section / filter -----
+// Kept up to date on every hash change (not on click), so analytics that
+// intercept the click still navigate to the right place.
+function syncLang() {
+  document.querySelectorAll(".lang-btn").forEach((a) => {
+    a.href = a.href.split("#")[0] + location.hash;
+  });
+}
+syncLang();
+addEventListener("hashchange", syncLang);
+
 // Portfolio filters + lightbox. Without JS the thumbnails simply link to the full images.
 (() => {
   const gallery = document.getElementById("gallery");
+  if (!gallery) return; // only the home page has the portfolio
   const chips = document.querySelectorAll(".chip");
   const tiles = [...gallery.querySelectorAll(".tile")];
 
@@ -49,41 +103,6 @@
   const initial = location.hash.match(/^#work\/([\w-]+)$/);
   applyFilter(initial && [...chips].some((c) => c.dataset.filter === initial[1]) ? initial[1] : "all");
 
-  // ----- opening hours: highlight today (in Greek time) -----
-  const hours = document.querySelector(".hours");
-  if (hours) {
-    const day = new Intl.DateTimeFormat("en-US", { timeZone: "Europe/Athens", weekday: "short" }).format(new Date());
-    const n = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].indexOf(day);
-    const row = hours.querySelector(`tr[data-day="${n}"]`);
-    if (row) {
-      row.classList.add("today");
-      row.querySelector("th").dataset.label = hours.dataset.todayLabel;
-    }
-  }
-
-  // ----- quick contact bar: step aside while the hero buttons or the contact cards are on screen -----
-  const bar = document.querySelector(".quickbar");
-  const spots = [".hero .actions", "#contact .contact-grid"].map((q) => document.querySelector(q)).filter(Boolean);
-  if (bar && "IntersectionObserver" in window) {
-    const inView = new Set();
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((e) => (e.isIntersecting ? inView.add(e.target) : inView.delete(e.target)));
-      bar.classList.toggle("is-hidden", inView.size > 0);
-      bar.inert = inView.size > 0; // keep the off-screen links out of the tab order
-    });
-    spots.forEach((el) => io.observe(el));
-  }
-
-  // ----- language switch: stay on the same section / filter -----
-  // Kept up to date on every hash change (not on click), so analytics that
-  // intercept the click still navigate to the right place.
-  function syncLang() {
-    document.querySelectorAll(".lang-btn").forEach((a) => {
-      a.href = a.href.split("#")[0] + location.hash;
-    });
-  }
-  syncLang();
-  addEventListener("hashchange", syncLang);
 
   // ----- lightbox -----
   const box = document.getElementById("lightbox");
